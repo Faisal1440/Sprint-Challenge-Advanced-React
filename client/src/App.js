@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import PlayerList from './components/PlayerList';
+import Player from './components/Player';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super(); //
+    this.state = { data: [] } //PROPS PASSED THRU .THIS
+  }
+
+  componentDidMount() {
+    console.log('THIS IS A COMP_DID_MOUNT_TEST'); // <---- CHECK BEFORE CONTINUING !!!!!!
+    fetch
+      ('http://localhost:5000/api/players') // REQUEST FOR PLAYERS 
+      .then(
+        res => res.json())
+      .then( 
+        datas => { this.setState({ data: datas })
+        console.log (this.state.data)})
+      .catch( 
+        err => console.log( err ))
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+        <Player/>
+        <PlayerList players={this.state.data} />
+      </div>
+    );
+  }
 }
 
 export default App;
