@@ -8,15 +8,15 @@ export const useDarkMode = () => {
   useLocalStorage('darkMode', false);
 
   
-  const dark = 
-  document.querySelector('body');
+  // const dark = 
+  // document.querySelector('body');
 
   
   useEffect(() => {
   storedValue ? 
-    dark.classList.add('dark-mode') :
-    dark.classList.remove('dark-mode')
-  }, [storedValue, dark.classList]);
+  document.querySelector('body'). classList.add('dark-mode') :
+  document.querySelector('body'). classList.remove('dark-mode') 
+  }, [storedValue]);
 
   return [storedValue, setValue];
 }
